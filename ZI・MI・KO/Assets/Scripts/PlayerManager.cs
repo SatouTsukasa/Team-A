@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour {
 
+    public GameObject gameManager;
+
     public LayerMask blockLayer;
 
     private Rigidbody2D rbody;
@@ -13,6 +15,7 @@ public class PlayerManager : MonoBehaviour {
     private float jumpPower = 400;
     private bool goJump = false;
     private bool canJump = false;
+    private bool usingButtons = false;
 
     public enum MOVE_DIR
     {
@@ -33,6 +36,31 @@ public class PlayerManager : MonoBehaviour {
         canJump = Physics2D.Linecast(transform.position - (transform.right * 0.07f), transform.position - (transform.up * 0.07f), blockLayer) ||
             Physics2D.Linecast(transform.position + (transform.right * 0.07f), transform.position + (transform.up * 0.07f), blockLayer);
 
+        if (!usingButtons)
+        {
+            float x = Input.GetAxisRaw("Horizontal");
+
+            if(x == 0)
+            {
+                moveDirection = MOVE_DIR.STOP;
+            }
+            else
+            {
+                if(x < 0)
+                {
+                    moveDirection = MOVE_DIR.LEFT;
+                }
+                else
+                {
+                    moveDirection = MOVE_DIR.RIGHT;
+                }
+            }
+
+            if (Input.GetKeyDown("space"))
+            {
+                PushJumpButton();
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -63,16 +91,19 @@ public class PlayerManager : MonoBehaviour {
     public void PushLeftButton()
     {
         moveDirection = MOVE_DIR.LEFT;
+        usingButtons = true;
     }
 
     public void PushRightButton()
     {
         moveDirection = MOVE_DIR.RIGHT;
+        usingButtons = true;
     }
 
     public void ReleaseMoveButton()
     {
         moveDirection = MOVE_DIR.STOP;
+        usingButtons = false;
     }
     public void PushJumpButton()
     {
@@ -80,5 +111,31 @@ public class PlayerManager : MonoBehaviour {
         {
             goJump = true;
         }
+    }
+
+    //衝突処理
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if(gameManager.GetComponent<GameManager>().gameMode != GameManager.GAME_MODE.PLAY)
+        {
+            return;
+        }
+
+        if(col.gameObject.tag == "Trap")
+        {
+            Debug.Log("aaa");
+            gameManager.GetComponent<GameManager>().GameOver();
+            DestroyPlayer();
+        }
+
+        if(col.gameObject.tag == "Goal")
+        {
+            gameManager.GetComponent<GameManager>().GameClear();
+        }
+    }
+
+    void DestroyPlayer()
+    {
+        Destroy(this.gameObject);
     }
 }
