@@ -44,7 +44,6 @@ public class EnemyManager : MonoBehaviour {
                     blockLayer);
                 if (isBlock)
                 {
-                    Debug.Log("aaa");
                     moveDirection = MOVE_DIR.RIGHT;
                 }
 
@@ -59,12 +58,16 @@ public class EnemyManager : MonoBehaviour {
                     blockLayer);
                 if (isBlock)
                 {
-                    Debug.Log("aaa");
                     moveDirection = MOVE_DIR.LEFT;
                 }
 
                 break;
                 
         }
+    }
+
+    public void DestroyEnemy()
+    {
+        Destroy(this.gameObject);
     }
 }
