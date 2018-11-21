@@ -309,6 +309,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\CoinManager.cs" />
     <Compile Include="Assets\Scripts\ConfettiChainsaw.cs" />
     <Compile Include="Assets\Scripts\EnemyManager.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />

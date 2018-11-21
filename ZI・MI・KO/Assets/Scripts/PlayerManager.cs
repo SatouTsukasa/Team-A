@@ -132,6 +132,28 @@ public class PlayerManager : MonoBehaviour {
         {
             gameManager.GetComponent<GameManager>().GameClear();
         }
+
+        if(col.gameObject.tag == "Enemy")
+        {
+            if(transform.position.y > col.gameObject.transform.position.y + 0.1f)
+            {
+                //踏んだ
+                rbody.velocity = new Vector2(rbody.velocity.x, 0);
+                rbody.AddForce(Vector2.up * jumpPower);
+                col.gameObject.GetComponent<EnemyManager>().DestroyEnemy();
+            }
+            else
+            {
+                //上からの接触ではない
+                gameManager.GetComponent<GameManager>().GameOver();
+                DestroyPlayer();
+            }
+        }
+
+        if(col.gameObject.tag == "Coin")
+        {
+            col.gameObject.GetComponent<CoinManager>().GetCoin();
+        }
     }
 
     void DestroyPlayer()
