@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour {
     {
         PLAY,
         CLEAR,
+        GAMEOVER,
     };
 
     private int score = 0;          //スコア
