@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using DG.Tweening;
+
 public class PlayerManager : MonoBehaviour {
 
     public GameObject gameManager;
@@ -12,7 +14,7 @@ public class PlayerManager : MonoBehaviour {
 
     private const float MOVE_SPEED = 3;
     private float moveSpeed;
-    private float jumpPower = 400;
+    private float jumpPower = 450;
     private bool goJump = false;
     private bool canJump = false;
     private bool usingButtons = false;
@@ -158,6 +160,16 @@ public class PlayerManager : MonoBehaviour {
 
     void DestroyPlayer()
     {
-        Destroy(this.gameObject);
+        gameManager.GetComponent<GameManager>().gameMode = GameManager.GAME_MODE.GAMEOVER;
+        //コライダー削除
+        CircleCollider2D circleCollider = GetComponent<CircleCollider2D>();
+        BoxCollider2D boxCollider = GetComponent<BoxCollider2D>();
+        Destroy(circleCollider);
+        Destroy(boxCollider);
+        //死亡アニメーション
+        Sequence animSet = DOTween.Sequence();
+        animSet.Append(transform.DOLocalMoveY(1.0f, 0.2f).SetRelative());
+        animSet.Append(transform.DOLocalMoveY(-10.0f, 1.0f).SetRelative());
+        Destroy(this.gameObject,1.2f);
     }
 }

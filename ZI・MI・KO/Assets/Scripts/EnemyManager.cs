@@ -2,7 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using DG.Tweening;
+
 public class EnemyManager : MonoBehaviour {
+    private const int ENEMY_POINT = 50;
+
+    private GameObject gameManager;
 
     public LayerMask blockLayer;
 
@@ -21,6 +26,7 @@ public class EnemyManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
         rbody = GetComponent < Rigidbody2D>();
+        gameManager = GameObject.Find("GameManager");
 	}
 	
 	// Update is called once per frame
@@ -68,6 +74,20 @@ public class EnemyManager : MonoBehaviour {
 
     public void DestroyEnemy()
     {
-        Destroy(this.gameObject);
+        gameManager.GetComponent<GameManager>().AddScore(ENEMY_POINT);
+
+        rbody.velocity = new Vector2(0, 0);
+
+        //コライダー削除
+        CircleCollider2D circleCollider = GetComponent<CircleCollider2D>();
+        BoxCollider2D boxCollider = GetComponent<BoxCollider2D>();
+        Destroy(circleCollider);
+        Destroy(boxCollider);
+        //死亡アニメーション
+        Sequence animSet = DOTween.Sequence();
+        animSet.Append(transform.DOLocalMoveY(0.5f, 0.2f).SetRelative());
+        animSet.Append(transform.DOLocalMoveY(-10.0f, 1.0f).SetRelative());
+
+        Destroy(this.gameObject,1.2f);
     }
 }
