@@ -11,10 +11,11 @@ public class PlayerManager : MonoBehaviour {
     public LayerMask blockLayer;
 
     private Rigidbody2D rbody;
+    private Animator animator;
 
     private const float MOVE_SPEED = 3;
     private float moveSpeed;
-    private float jumpPower = 450;
+    private float jumpPower = 600;
     private bool goJump = false;
     private bool canJump = false;
     private bool usingButtons = false;
@@ -31,6 +32,7 @@ public class PlayerManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         rbody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -71,14 +73,17 @@ public class PlayerManager : MonoBehaviour {
         {
             case MOVE_DIR.STOP:
                 moveSpeed = 0;
+                animator.SetBool("canWalk", false);
                 break;
             case MOVE_DIR.LEFT:
                 moveSpeed = MOVE_SPEED * -1;
-                transform.localScale = new Vector2(-0.27f, 0.27f);
+                transform.localScale = new Vector2(-0.2f, 0.2f);
+                animator.SetBool("canWalk", canJump);
                 break;
             case MOVE_DIR.RIGHT:
                 moveSpeed = MOVE_SPEED * 1;
-                transform.localScale = new Vector2(0.27f, 0.27f);
+                transform.localScale = new Vector2(0.2f, 0.2f);
+                animator.SetBool("canWalk", canJump);
                 break;
         }
         rbody.velocity = new Vector2(moveSpeed, rbody.velocity.y);
@@ -125,7 +130,7 @@ public class PlayerManager : MonoBehaviour {
 
         if(col.gameObject.tag == "Trap")
         {
-            Debug.Log("aaa");
+            //Debug.Log("aaa");
             gameManager.GetComponent<GameManager>().GameOver();
             DestroyPlayer();
         }
