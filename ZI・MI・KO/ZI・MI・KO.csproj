@@ -320,8 +320,11 @@
     <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
     <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUtils.cs" />
     <Compile Include="Assets\Scripts\BoxContentManager.cs" />
+    <Compile Include="Assets\Scripts\BulletManager.cs" />
     <Compile Include="Assets\Scripts\CoinManager.cs" />
     <Compile Include="Assets\Scripts\ConfettiChainsaw.cs" />
+    <Compile Include="Assets\Scripts\CookieBlockBreak.cs" />
+    <Compile Include="Assets\Scripts\CreampuffCanonManager.cs" />
     <Compile Include="Assets\Scripts\EnemyManager.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\LiftInstance.cs" />

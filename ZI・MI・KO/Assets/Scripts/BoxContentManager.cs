@@ -5,7 +5,7 @@ using UnityEngine;
 public class BoxContentManager : MonoBehaviour {
 
     public GameObject content;
-    public LayerMask playerLayer;
+    //public LayerMask playerLayer;
 
     private Vector2 movePoint;
     private bool IsOpened;
