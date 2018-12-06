@@ -65,6 +65,7 @@ public class PlayerManager : MonoBehaviour {
                 PushJumpButton();
             }
         }
+        
     }
 
     private void FixedUpdate()
@@ -93,6 +94,7 @@ public class PlayerManager : MonoBehaviour {
             rbody.AddForce(Vector2.up * jumpPower);
             goJump = false;
         }
+        animator.SetBool("onGround", canJump);
     }
 
     public void PushLeftButton()
