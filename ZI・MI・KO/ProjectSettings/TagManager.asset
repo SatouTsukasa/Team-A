@@ -8,6 +8,7 @@ TagManager:
   - Goal
   - Enemy
   - Coin
+  - JumpBlock
   layers:
   - Default
   - TransparentFX

@@ -15,7 +15,7 @@ public class PlayerManager : MonoBehaviour {
 
     private const float MOVE_SPEED = 3;
     private float moveSpeed;
-    private float jumpPower = 600;
+    private float jumpPower = 500;
     private bool goJump = false;
     private bool canJump = false;
     private bool usingButtons = false;
@@ -161,9 +161,19 @@ public class PlayerManager : MonoBehaviour {
         {
             col.gameObject.GetComponent<CoinManager>().GetCoin();
         }
+
+        if(col.gameObject.tag == "JumpBlock")
+        {
+            if(transform.position.y > col.gameObject.transform.position.y)
+            {
+                //Debug.Log("bbb");
+                rbody.AddForce(Vector2.up * jumpPower * 1.5f);
+            }
+            
+        }
     }
 
-    void DestroyPlayer()
+    public void DestroyPlayer()
     {
         gameManager.GetComponent<GameManager>().gameMode = GameManager.GAME_MODE.GAMEOVER;
         //コライダー削除

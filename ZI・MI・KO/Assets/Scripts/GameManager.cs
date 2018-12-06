@@ -8,11 +8,13 @@ public class GameManager : MonoBehaviour {
 
     //定数定義
     private const int MAX_SCORE = 999999;
+    private float timeleft;
 
     public GameObject textGameOver;
     public GameObject textGameClear;
     public GameObject buttons;
     public GameObject textScoreNumber;
+    public GameObject TimerNumber;
 
     public enum GAME_MODE
     {
@@ -23,6 +25,7 @@ public class GameManager : MonoBehaviour {
 
     private int score = 0;          //スコア
     private int displayScore = 0;   //表示用スコア
+    private int time = 5;           //制限時間
 
     public GAME_MODE gameMode = GAME_MODE.PLAY; 
 
@@ -33,6 +36,8 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        timeleft -= Time.deltaTime;
+
 		if(score > displayScore)
         {
             displayScore += 10;
@@ -44,7 +49,20 @@ public class GameManager : MonoBehaviour {
 
             RefreshScore();
         }
-	}
+        if(timeleft <= 0.0f)
+        {
+            time--;
+            RefreshTime();
+            timeleft = 1.0f;
+        }
+        if (time < 1)
+        {
+            time = 0;
+            GameOver();
+            GameObject.Find("Player").GetComponent<PlayerManager>().DestroyPlayer();
+        }
+
+    }
 
     public void GameOver()
     {
@@ -72,5 +90,10 @@ public class GameManager : MonoBehaviour {
     void RefreshScore()
     {
         textScoreNumber.GetComponent<Text>().text = displayScore.ToString();
+    }
+
+    void RefreshTime()
+    {
+        TimerNumber.GetComponent<Text>().text = time.ToString();
     }
 }
