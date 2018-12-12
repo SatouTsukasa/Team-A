@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour {
     public GameObject buttons;
     public GameObject textScoreNumber;
     public GameObject TimerNumber;
-
+    
     public Text messageStart;
 
     public enum GAME_MODE
@@ -28,15 +28,19 @@ public class GameManager : MonoBehaviour {
 
     private int score = 0;          //スコア
     private int displayScore = 0;   //表示用スコア
-    private int time = 100;           //制限時間
+    private int time = 7;           //制限時間
 
-    public GAME_MODE gameMode = GAME_MODE.PLAY; 
+    public GAME_MODE gameMode = GAME_MODE.PLAY;
+
+    public bool gameOver;
+    public bool gameClear;
 
 	// Use this for initialization
 	void Start () {
         RefreshScore();
         messageStart.enabled = true;
-        
+        gameOver = false;
+        gameClear = false;
     }
 	
 	// Update is called once per frame
@@ -60,34 +64,44 @@ public class GameManager : MonoBehaviour {
 
             RefreshScore();
         }
-        if(timeleft <= 0.0f)
+        if(timeleft <= 0.0 && (!gameOver || gameClear == false))
         {
-            time--;
-            RefreshTime();
-            timeleft = 1.0f;
-        }
-        if (time < 1)
-        {
-            time = 0;
-            GameOver();
-            GameObject.Find("Player").GetComponent<PlayerManager>().DestroyPlayer();
-        }
+            if (gameClear == false)
+            {
+                time--;
+                RefreshTime();
+                timeleft = 1.0f;
+            }
+            if (time < 1)
+            {
+                time = 1;
+                GameOver();
+                GameObject.Find("Player").GetComponent<PlayerManager>().DestroyPlayer();
+            }
+            
 
+        }
     }
 
+    //ゲームオーバー時
     public void GameOver()
     {
+        gameMode = GAME_MODE.GAMEOVER;
         textGameOver.SetActive(true);
         buttons.SetActive(false);
+        gameOver = true;
     }
 
+    //ゲームクリア時
     public void GameClear()
     {
         gameMode = GAME_MODE.CLEAR;
         textGameClear.SetActive(true);
         buttons.SetActive(false);
+        gameClear = true;
     }
 
+    //スコア更新
     public void AddScore(int val)
     {
         score += val;
@@ -103,6 +117,7 @@ public class GameManager : MonoBehaviour {
         textScoreNumber.GetComponent<Text>().text = displayScore.ToString();
     }
 
+    //表示用タイム更新
     void RefreshTime()
     {
         TimerNumber.GetComponent<Text>().text = time.ToString();

@@ -72,6 +72,9 @@ public class EnemyManager : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// 消滅処理
+    /// </summary>
     public void DestroyEnemy()
     {
         gameManager.GetComponent<GameManager>().AddScore(ENEMY_POINT);
@@ -83,6 +86,7 @@ public class EnemyManager : MonoBehaviour {
         BoxCollider2D boxCollider = GetComponent<BoxCollider2D>();
         Destroy(circleCollider);
         Destroy(boxCollider);
+
         //死亡アニメーション
         Sequence animSet = DOTween.Sequence();
         animSet.Append(transform.DOLocalMoveY(0.5f, 0.2f).SetRelative());

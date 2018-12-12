@@ -33,6 +33,9 @@ public class CreampuffCanonManager : MonoBehaviour {
         }
 	}
 
+    /// <summary>
+    /// 弾生成
+    /// </summary>
     void shot()
     {
         Instantiate(bullet, transform.position, transform.rotation);
