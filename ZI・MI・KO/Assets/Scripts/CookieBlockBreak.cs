@@ -19,6 +19,10 @@ public class CookieBlockBreak : MonoBehaviour {
         //Debug.Log(Break);
     }
 
+    /// <summary>
+    /// 衝突処理
+    /// </summary>
+    /// <param name="col">衝突したObjの情報</param>
     private void OnCollisionEnter2D(Collision2D col)
     {
         Debug.Log("aaaa");

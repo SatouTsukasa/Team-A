@@ -17,6 +17,9 @@ public class CoinManager : MonoBehaviour {
 		
 	}
 
+    /// <summary>
+    /// コイン入手時
+    /// </summary>
     public void GetCoin()
     {
         gameManager.GetComponent<GameManager>().AddScore(COIN_POINT);

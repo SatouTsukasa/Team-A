@@ -97,23 +97,36 @@ public class PlayerManager : MonoBehaviour {
         animator.SetBool("onGround", canJump);
     }
 
+    /// <summary>
+    /// ボタン左移動
+    /// </summary>
     public void PushLeftButton()
     {
         moveDirection = MOVE_DIR.LEFT;
         usingButtons = true;
     }
 
+    /// <summary>
+    /// ボタン右移動
+    /// </summary>
     public void PushRightButton()
     {
         moveDirection = MOVE_DIR.RIGHT;
         usingButtons = true;
     }
 
+    /// <summary>
+    /// ボタン押してない
+    /// </summary>
     public void ReleaseMoveButton()
     {
         moveDirection = MOVE_DIR.STOP;
         usingButtons = false;
     }
+
+    /// <summary>
+    /// ボタンジャンプ
+    /// </summary>
     public void PushJumpButton()
     {
         if (canJump)
@@ -122,7 +135,10 @@ public class PlayerManager : MonoBehaviour {
         }
     }
 
-    //衝突処理
+    /// <summary>
+    /// 衝突処理
+    /// </summary>
+    /// <param name="col">衝突したObjの情報</param>
     private void OnTriggerEnter2D(Collider2D col)
     {
         if(gameManager.GetComponent<GameManager>().gameMode != GameManager.GAME_MODE.PLAY)
@@ -183,6 +199,7 @@ public class PlayerManager : MonoBehaviour {
         BoxCollider2D boxCollider = GetComponent<BoxCollider2D>();
         Destroy(circleCollider);
         Destroy(boxCollider);
+
         //死亡アニメーション
         Sequence animSet = DOTween.Sequence();
         animSet.Append(transform.DOLocalMoveY(1.0f, 0.2f).SetRelative());

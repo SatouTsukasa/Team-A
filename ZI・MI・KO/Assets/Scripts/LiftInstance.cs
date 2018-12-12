@@ -16,6 +16,9 @@ public class LiftInstance : MonoBehaviour {
 		
 	}
 
+    /// <summary>
+    /// リフト生成
+    /// </summary>
     void Instance()
     {
         Instantiate(Lift,new Vector3(transform.position.x,transform.position.y,transform.position.z),Quaternion.identity);

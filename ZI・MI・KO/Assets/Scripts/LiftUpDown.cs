@@ -15,6 +15,10 @@ public class LiftUpDown : MonoBehaviour {
         transform.position = new Vector2(transform.position.x, transform.position.y - 0.03f);
 	}
 
+    /// <summary>
+    /// 衝突処理
+    /// </summary>
+    /// <param name="col">衝突したObjの情報</param>
     private void OnCollisionEnter2D(Collision2D col)
     {
         if(col.gameObject.gameObject == LiftDestroy)
