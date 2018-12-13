@@ -156,6 +156,7 @@ public class PlayerManager : MonoBehaviour {
         if(col.gameObject.tag == "Goal")
         {
             gameManager.GetComponent<GameManager>().GameClear();
+            GetComponent<Rigidbody2D>().gravityScale = 100;
         }
 
         if(col.gameObject.tag == "Enemy")

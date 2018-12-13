@@ -13,6 +13,10 @@ public class GameManager : MonoBehaviour {
 
     public GameObject textGameOver;
     public GameObject textGameClear;
+    public GameObject TextFinalTotalScoreTime;
+    public GameObject TextFinalScore;
+    public GameObject TextFinalTime;
+    public GameObject TextFinalTotalScore;
     public GameObject buttons;
     public GameObject textScoreNumber;
     public GameObject TimerNumber;
@@ -28,7 +32,7 @@ public class GameManager : MonoBehaviour {
 
     private int score = 0;          //スコア
     private int displayScore = 0;   //表示用スコア
-    private int time = 7;           //制限時間
+    private int time = 100;           //制限時間
 
     public GAME_MODE gameMode = GAME_MODE.PLAY;
 
@@ -97,6 +101,13 @@ public class GameManager : MonoBehaviour {
     {
         gameMode = GAME_MODE.CLEAR;
         textGameClear.SetActive(true);
+        TextFinalTotalScoreTime.SetActive(true);
+        TextFinalScore.SetActive(true);
+        TextFinalTime.SetActive(true);
+        TextFinalTotalScore.SetActive(true);
+        RefreshFinalScore();
+        RefreshFinalTime();
+        RefreshFinalTotalScore();
         buttons.SetActive(false);
         gameClear = true;
     }
@@ -121,5 +132,20 @@ public class GameManager : MonoBehaviour {
     void RefreshTime()
     {
         TimerNumber.GetComponent<Text>().text = time.ToString();
+    }
+
+    void RefreshFinalScore()
+    {
+        TextFinalScore.GetComponent<Text>().text = displayScore.ToString();
+    }
+
+    void RefreshFinalTime()
+    {
+        TextFinalTime.GetComponent<Text>().text = time.ToString();
+    }
+
+    void RefreshFinalTotalScore()
+    {
+        TextFinalTotalScore.GetComponent<Text>().text = (displayScore + time * 100).ToString();
     }
 }
