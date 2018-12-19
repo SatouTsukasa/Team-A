@@ -14,11 +14,19 @@ public class PlayerManager : MonoBehaviour {
     private Animator animator;
 
     private const float MOVE_SPEED = 3;
+
     private float moveSpeed;
     private float jumpPower = 500;
+
+
     private bool goJump = false;
     private bool canJump = false;
     private bool usingButtons = false;
+    private bool isHit = false;
+
+    private float HitCount = 0;
+
+    private Renderer renderer;
 
     public enum MOVE_DIR
     {
@@ -33,6 +41,8 @@ public class PlayerManager : MonoBehaviour {
 	void Start () {
         rbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        renderer = GetComponent<Renderer>();
+        
 	}
 	
 	// Update is called once per frame
@@ -70,6 +80,7 @@ public class PlayerManager : MonoBehaviour {
 
     private void FixedUpdate()
     {
+        Debug.Log(HitCount);
         switch (moveDirection)
         {
             case MOVE_DIR.STOP:
@@ -155,8 +166,10 @@ public class PlayerManager : MonoBehaviour {
 
         if(col.gameObject.tag == "Goal")
         {
+            Destroy(animator,0.5f);
             gameManager.GetComponent<GameManager>().GameClear();
-            GetComponent<Rigidbody2D>().gravityScale = 100;
+            //GetComponent<Rigidbody2D>().gravityScale = 100;
+            Destroy(this,0.5f);
         }
 
         if(col.gameObject.tag == "Enemy")
@@ -170,9 +183,23 @@ public class PlayerManager : MonoBehaviour {
             }
             else
             {
+                //Debug.Log(Life);
                 //上からの接触ではない
-                gameManager.GetComponent<GameManager>().GameOver();
-                DestroyPlayer();
+                GameObject.Find("LifeGauge").GetComponent<LifeManager>().damege();
+                if(GameObject.Find("LifeGauge").GetComponent<LifeManager>().Life == 0)
+                {
+                    
+                    //ライフが０なら
+                    gameManager.GetComponent<GameManager>().GameOver();
+                    DestroyPlayer();
+                }
+                else
+                {
+                    isHit = true;
+                    //ライフが残っていれば
+                    StartCoroutine("Invincible", isHit);
+                }
+                
             }
         }
 
@@ -190,6 +217,57 @@ public class PlayerManager : MonoBehaviour {
             }
             
         }
+    }
+
+
+    IEnumerator Invincible()
+    {
+        Debug.Log(isHit);
+        if(isHit && HitCount == 0)
+        {
+            gameObject.layer = LayerMask.NameToLayer("PlayerDamage");
+            HitCount = 30;
+            //isHit = true;
+        }
+        if (isHit)
+        {
+            //透明にする
+            renderer.material.color = new Color(1, 1, 1, 0);
+            //0.05秒待つ
+            yield return new WaitForSeconds(0.05f);
+            //元に戻す
+            renderer.material.color = new Color(1, 1, 1, 1);
+            //0.05秒待つ
+            yield return new WaitForSeconds(0.05f);
+            //透明にする
+            renderer.material.color = new Color(1, 1, 1, 0);
+            //0.05秒待つ
+            yield return new WaitForSeconds(0.05f);
+            //元に戻す
+            renderer.material.color = new Color(1, 1, 1, 1);
+            //0.05秒待つ
+            yield return new WaitForSeconds(0.05f);
+            //透明にする
+            renderer.material.color = new Color(1, 1, 1, 0);
+            //0.05秒待つ
+            yield return new WaitForSeconds(0.05f);
+            //元に戻す
+            renderer.material.color = new Color(1, 1, 1, 1);
+            //0.05秒待つ
+            yield return new WaitForSeconds(0.05f);
+        }
+        
+        if (HitCount > 0)
+        {
+            HitCount -= Time.deltaTime;
+            if(HitCount <= 0)
+            {
+                
+                HitCount = 0;
+                isHit = false;   
+            }
+        }
+        gameObject.layer = LayerMask.NameToLayer("Player");
     }
 
     public void DestroyPlayer()
