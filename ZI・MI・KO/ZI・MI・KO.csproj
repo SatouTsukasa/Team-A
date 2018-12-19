@@ -327,6 +327,7 @@
     <Compile Include="Assets\Scripts\CreampuffCanonManager.cs" />
     <Compile Include="Assets\Scripts\EnemyManager.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\LifeManager.cs" />
     <Compile Include="Assets\Scripts\LiftInstance.cs" />
     <Compile Include="Assets\Scripts\LiftUpDown.cs" />
     <Compile Include="Assets\Scripts\MainCameraManager.cs" />
