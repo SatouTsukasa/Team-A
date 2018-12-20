@@ -75,6 +75,10 @@ public class PlayerManager : MonoBehaviour {
                 PushJumpButton();
             }
         }
+        if (isHit)
+        {
+            StartCoroutine("Invincible", isHit);
+        }
         
     }
 
@@ -159,9 +163,21 @@ public class PlayerManager : MonoBehaviour {
 
         if(col.gameObject.tag == "Trap")
         {
+            GameObject.Find("LifeGauge").GetComponent<LifeManager>().damege();
             //Debug.Log("aaa");
-            gameManager.GetComponent<GameManager>().GameOver();
-            DestroyPlayer();
+            if (GameObject.Find("LifeGauge").GetComponent<LifeManager>().Life == 0)
+            {
+
+                //ライフが０なら
+                gameManager.GetComponent<GameManager>().GameOver();
+                DestroyPlayer();
+            }
+            else
+            {
+                isHit = true;
+                //ライフが残っていれば
+
+            }
         }
 
         if(col.gameObject.tag == "Goal")
@@ -197,10 +213,16 @@ public class PlayerManager : MonoBehaviour {
                 {
                     isHit = true;
                     //ライフが残っていれば
-                    StartCoroutine("Invincible", isHit);
+                    
                 }
                 
             }
+        }
+
+        if(col.gameObject.tag == "OutZone")
+        {
+            gameManager.GetComponent<GameManager>().GameOver();
+            DestroyPlayer();
         }
 
         if(col.gameObject.tag == "Coin")
@@ -226,29 +248,13 @@ public class PlayerManager : MonoBehaviour {
         if(isHit && HitCount == 0)
         {
             gameObject.layer = LayerMask.NameToLayer("PlayerDamage");
-            HitCount = 30;
+            HitCount = 1f;
             //isHit = true;
         }
         if (isHit)
         {
             //透明にする
-            renderer.material.color = new Color(1, 1, 1, 0);
-            //0.05秒待つ
-            yield return new WaitForSeconds(0.05f);
-            //元に戻す
-            renderer.material.color = new Color(1, 1, 1, 1);
-            //0.05秒待つ
-            yield return new WaitForSeconds(0.05f);
-            //透明にする
-            renderer.material.color = new Color(1, 1, 1, 0);
-            //0.05秒待つ
-            yield return new WaitForSeconds(0.05f);
-            //元に戻す
-            renderer.material.color = new Color(1, 1, 1, 1);
-            //0.05秒待つ
-            yield return new WaitForSeconds(0.05f);
-            //透明にする
-            renderer.material.color = new Color(1, 1, 1, 0);
+            renderer.material.color = new Color(0.5f, 0.5f, 0.5f, 0);
             //0.05秒待つ
             yield return new WaitForSeconds(0.05f);
             //元に戻す
@@ -260,14 +266,15 @@ public class PlayerManager : MonoBehaviour {
         if (HitCount > 0)
         {
             HitCount -= Time.deltaTime;
-            if(HitCount <= 0)
+            if(HitCount <= 0.1)
             {
                 
                 HitCount = 0;
-                isHit = false;   
+                isHit = false;
+                gameObject.layer = LayerMask.NameToLayer("Player");
             }
         }
-        gameObject.layer = LayerMask.NameToLayer("Player");
+        
     }
 
     public void DestroyPlayer()

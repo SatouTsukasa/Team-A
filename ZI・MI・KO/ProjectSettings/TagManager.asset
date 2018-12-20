@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Coin
   - JumpBlock
+  - OutZone
   layers:
   - Default
   - TransparentFX

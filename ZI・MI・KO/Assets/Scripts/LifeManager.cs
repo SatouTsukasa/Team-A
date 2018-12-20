@@ -22,7 +22,7 @@ public class LifeManager : MonoBehaviour {
 
     public void damege()
     {
-        GetComponent<Image>().fillAmount -= 0.125f;
-        Life -= 0.5f; 
+        GetComponent<Image>().fillAmount -= 0.25f;
+        Life -= 1f; 
     }
 }
