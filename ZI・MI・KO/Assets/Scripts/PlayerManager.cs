@@ -9,6 +9,7 @@ public class PlayerManager : MonoBehaviour {
     public GameObject gameManager;
 
     public LayerMask blockLayer;
+    public float jumpPower = 700;
 
     private Rigidbody2D rbody;
     private Animator animator;
@@ -16,7 +17,7 @@ public class PlayerManager : MonoBehaviour {
     private const float MOVE_SPEED = 3;
 
     private float moveSpeed;
-    private float jumpPower = 500;
+    
 
 
     private bool goJump = false;
@@ -84,7 +85,7 @@ public class PlayerManager : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        Debug.Log(HitCount);
+        //Debug.Log(HitCount);
         switch (moveDirection)
         {
             case MOVE_DIR.STOP:
@@ -144,6 +145,7 @@ public class PlayerManager : MonoBehaviour {
     /// </summary>
     public void PushJumpButton()
     {
+
         if (canJump)
         {
             goJump = true;
