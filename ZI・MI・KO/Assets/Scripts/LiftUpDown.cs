@@ -3,27 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LiftUpDown : MonoBehaviour {
-    public GameObject LiftDestroy;
+
+    private Vector3 trans;
+
+    public float up;
 
 	// Use this for initialization
 	void Start () {
-		
+        trans = transform.position;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        transform.position = new Vector2(transform.position.x, transform.position.y - 0.03f);
+		
 	}
 
-    /// <summary>
-    /// 衝突処理
-    /// </summary>
-    /// <param name="col">衝突したObjの情報</param>
-    private void OnCollisionEnter2D(Collision2D col)
+    private void FixedUpdate()
     {
-        if(col.gameObject.gameObject == LiftDestroy)
-        {
-            Destroy(this.gameObject);
-        }
+        transform.position = new Vector3(transform.position.x, trans.y + Mathf.PingPong(Time.time, up), transform.position.z);
     }
 }

@@ -32,7 +32,8 @@ public class GameManager : MonoBehaviour {
 
     private int score = 0;          //スコア
     private int displayScore = 0;   //表示用スコア
-    private int time = 100;           //制限時間
+
+    public int time;           //制限時間
 
     public GAME_MODE gameMode = GAME_MODE.PLAY;
 

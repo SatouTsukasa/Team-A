@@ -22,13 +22,13 @@ public class MainCameraManager : MonoBehaviour {
             {
                 cameraPos.x = 0.0f;
             }
-            if(cameraPos.y > 0.0f)
+            /*if(cameraPos.y > 10.0f)
             {
-                cameraPos.y = 0.0f;
-            }
-            if(cameraPos.y < 5.0f)
+                cameraPos.y = 10.0f;
+            }*/
+            if(cameraPos.y < -0f)
             {
-                cameraPos.y = 0.0f;
+                cameraPos.y = -0f;
             }
 
             transform.position = cameraPos;
