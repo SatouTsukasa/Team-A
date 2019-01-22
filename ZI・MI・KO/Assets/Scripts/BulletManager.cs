@@ -5,11 +5,11 @@ using UnityEngine;
 public class BulletManager : MonoBehaviour {
 
     public float Speed;
-    public float time = 0;
+    public float time;
 
 	// Use this for initialization
 	void Start () {
-        Destroy(gameObject, 3.0f);
+        Destroy(gameObject, time);
 	}
 	
 	// Update is called once per frame
