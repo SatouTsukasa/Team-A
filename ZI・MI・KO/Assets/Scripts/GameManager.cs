@@ -4,6 +4,9 @@ using UnityEngine;
 
 using UnityEngine.UI;
 
+
+using UnityEditor;
+
 public class GameManager : MonoBehaviour {
 
     //定数定義
@@ -42,6 +45,7 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        
         RefreshScore();
         messageStart.enabled = true;
         gameOver = false;
@@ -150,3 +154,4 @@ public class GameManager : MonoBehaviour {
         TextFinalTotalScore.GetComponent<Text>().text = (displayScore + time * 100).ToString();
     }
 }
+
