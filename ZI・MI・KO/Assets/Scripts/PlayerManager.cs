@@ -234,11 +234,12 @@ public class PlayerManager : MonoBehaviour {
 
         if(col.gameObject.tag == "JumpBlock")
         {
-            if(transform.position.y > col.gameObject.transform.position.y)
+            /*if(transform.position.y > col.gameObject.transform.position.y)
             {
                 //Debug.Log("bbb");
                 rbody.AddForce(Vector2.up * jumpPower * 1.5f);
-            }
+            }*/
+            GameObject.Find("JumpBlock").GetComponent<JumpBlock>().Jump();
             
         }
     }

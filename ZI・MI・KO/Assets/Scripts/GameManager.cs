@@ -99,6 +99,10 @@ public class GameManager : MonoBehaviour {
         textGameOver.SetActive(true);
         buttons.SetActive(false);
         gameOver = true;
+        GameObject.Find("CanvasUI").GetComponent<StageSelectButton>().StageSelect.SetActive(true);
+        GameObject.Find("CanvasUI").GetComponent<StageSelectButton>().TitleButton.SetActive(true);
+        GameObject.Find("CanvasUI").GetComponent<StageSelectButton>().RetryButton.SetActive(true);
+
     }
 
     //ゲームクリア時
@@ -115,6 +119,9 @@ public class GameManager : MonoBehaviour {
         RefreshFinalTotalScore();
         buttons.SetActive(false);
         gameClear = true;
+        GameObject.Find("CanvasUI").GetComponent<StageSelectButton>().StageSelect.SetActive(true);
+        GameObject.Find("CanvasUI").GetComponent<StageSelectButton>().TitleButton.SetActive(true);
+        GameObject.Find("CanvasUI").GetComponent<StageSelectButton>().RetryButton.SetActive(true);
     }
 
     //スコア更新
