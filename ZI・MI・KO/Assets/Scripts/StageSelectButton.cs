@@ -50,7 +50,7 @@ public class StageSelectButton : MonoBehaviour {
                 SceneManager.LoadScene("StageSelect");
                 break;
             case 3:
-                SceneManager.LoadScene("TitleScene");
+                SceneManager.LoadScene("Title");
                 break;
             case 4:
                     Debug.Log("asdf");
@@ -68,6 +68,19 @@ public class StageSelectButton : MonoBehaviour {
                 VolumeSlider.SetActive(false);
                 Time.timeScale = 1f;
                 
+                break;
+            case 6:
+                SceneManager.LoadScene("WolrdSelect");
+                break;
+            case 7:
+                if(SceneManager.GetActiveScene().name == "Main")
+                {
+                    SceneManager.LoadScene("Main");
+                }
+                else if(SceneManager.GetActiveScene().name == "Main2")
+                {
+                    SceneManager.LoadScene("Main2");
+                }
                 break;
             default:
                 break;
