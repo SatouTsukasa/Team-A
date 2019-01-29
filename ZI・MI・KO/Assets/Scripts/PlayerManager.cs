@@ -10,6 +10,7 @@ public class PlayerManager : MonoBehaviour {
 
     public LayerMask blockLayer;
     public float jumpPower = 700;
+    public GameObject RibbonP;
 
     private Rigidbody2D rbody;
     private Animator animator;
@@ -43,6 +44,7 @@ public class PlayerManager : MonoBehaviour {
         rbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         renderer = GetComponent<Renderer>();
+        //RibbonP.SetActive(false);
         
 	}
 	
@@ -241,6 +243,14 @@ public class PlayerManager : MonoBehaviour {
             }*/
             GameObject.Find("JumpBlock").GetComponent<JumpBlock>().Jump();
             
+        }
+
+        if(col.gameObject.tag == "Ribbon")
+        {
+            animator.SetBool("RibbonCatch", true);
+            //RibbonP.SetActive(true);
+            //this.gameObject.GetComponent<SpriteRenderer>().sprite = RibbonP;
+            Debug.Log("asdfg");
         }
     }
 

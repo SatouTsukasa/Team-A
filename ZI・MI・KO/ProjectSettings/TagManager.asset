@@ -10,6 +10,7 @@ TagManager:
   - Coin
   - JumpBlock
   - OutZone
+  - Ribbon
   layers:
   - Default
   - TransparentFX
