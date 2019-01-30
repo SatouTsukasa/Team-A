@@ -10,7 +10,7 @@ public class PlayerManager : MonoBehaviour {
 
     public LayerMask blockLayer;
     public float jumpPower = 700;
-    public GameObject RibbonP;
+    public GameObject Ribbon;
 
     private Rigidbody2D rbody;
     private Animator animator;
@@ -25,6 +25,7 @@ public class PlayerManager : MonoBehaviour {
     private bool canJump = false;
     private bool usingButtons = false;
     private bool isHit = false;
+    private bool RibbonC = false;
 
     private float HitCount = 0;
 
@@ -44,7 +45,7 @@ public class PlayerManager : MonoBehaviour {
         rbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         renderer = GetComponent<Renderer>();
-        //RibbonP.SetActive(false);
+        Ribbon.SetActive(false);
         
 	}
 	
@@ -154,6 +155,22 @@ public class PlayerManager : MonoBehaviour {
         }
     }
 
+    public void PushAttackButton()
+    {
+        if (RibbonC)
+        {
+            animator.SetBool("Attack", true);
+            Ribbon.SetActive(true);
+        }
+
+    }
+
+    public void ReleaseAttackButton()
+    {
+        animator.SetBool("Attack", false);
+        Ribbon.SetActive(false);
+    }
+
     /// <summary>
     /// 衝突処理
     /// </summary>
@@ -248,9 +265,10 @@ public class PlayerManager : MonoBehaviour {
         if(col.gameObject.tag == "Ribbon")
         {
             animator.SetBool("RibbonCatch", true);
+            RibbonC = true;
             //RibbonP.SetActive(true);
             //this.gameObject.GetComponent<SpriteRenderer>().sprite = RibbonP;
-            Debug.Log("asdfg");
+            //Debug.Log("asdfg");
         }
     }
 
