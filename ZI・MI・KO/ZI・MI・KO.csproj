@@ -334,6 +334,7 @@
     <Compile Include="Assets\Scripts\MainCameraManager.cs" />
     <Compile Include="Assets\Scripts\Option.cs" />
     <Compile Include="Assets\Scripts\PlayerManager.cs" />
+    <Compile Include="Assets\Scripts\RibbonManager.cs" />
     <Compile Include="Assets\Scripts\StageSelectButton.cs" />
   </ItemGroup>
   <ItemGroup>

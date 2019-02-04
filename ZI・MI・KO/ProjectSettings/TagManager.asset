@@ -24,8 +24,8 @@ TagManager:
   - Player
   - PlayerDamage
   - Enemy
-  - 
-  - 
+  - RibbonAttack
+  - PlayerAttack
   - 
   - 
   - 

@@ -159,6 +159,7 @@ public class PlayerManager : MonoBehaviour {
     {
         if (RibbonC)
         {
+            gameObject.layer = LayerMask.NameToLayer("PlayerAttack");
             animator.SetBool("Attack", true);
             Ribbon.SetActive(true);
         }
@@ -167,6 +168,7 @@ public class PlayerManager : MonoBehaviour {
 
     public void ReleaseAttackButton()
     {
+        gameObject.layer = LayerMask.NameToLayer("Player");
         animator.SetBool("Attack", false);
         Ribbon.SetActive(false);
     }
@@ -177,6 +179,7 @@ public class PlayerManager : MonoBehaviour {
     /// <param name="col">衝突したObjの情報</param>
     private void OnTriggerEnter2D(Collider2D col)
     {
+        Debug.Log(col.gameObject.tag);
         if(gameManager.GetComponent<GameManager>().gameMode != GameManager.GAME_MODE.PLAY)
         {
             return;
@@ -275,7 +278,7 @@ public class PlayerManager : MonoBehaviour {
 
     IEnumerator Invincible()
     {
-        Debug.Log(isHit);
+        //Debug.Log(isHit);
         if(isHit && HitCount == 0)
         {
             gameObject.layer = LayerMask.NameToLayer("PlayerDamage");
