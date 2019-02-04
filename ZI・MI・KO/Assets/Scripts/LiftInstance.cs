@@ -23,4 +23,6 @@ public class LiftInstance : MonoBehaviour {
     {
         Instantiate(Lift,new Vector3(transform.position.x,transform.position.y,transform.position.z),Quaternion.identity);
     }
+
+    
 }

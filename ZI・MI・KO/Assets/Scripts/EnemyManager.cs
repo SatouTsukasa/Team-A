@@ -74,10 +74,10 @@ public class EnemyManager : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.gameObject.tag == "Trap")
+        /*if(col.gameObject.tag == "Trap")
         {
             DestroyEnemy();
-        }
+        }*/
 
         if (col.gameObject.tag == "Ribbon")
         {

@@ -21,9 +21,10 @@ public class Lift : MonoBehaviour {
     /// <param name="col">衝突したObjの情報</param>
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if(col.gameObject.gameObject == LiftDestroy)
+        if(col.gameObject.tag == "LiftDestroy")
         {
-            Destroy(this.gameObject);
+            Debug.Log(col.gameObject.tag);
+            Destroy(this);
         }
     }
 }
