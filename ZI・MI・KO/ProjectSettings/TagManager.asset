@@ -11,6 +11,7 @@ TagManager:
   - JumpBlock
   - OutZone
   - Ribbon
+  - LiftDestroy
   layers:
   - Default
   - TransparentFX
@@ -24,8 +25,8 @@ TagManager:
   - Player
   - PlayerDamage
   - Enemy
-  - 
-  - 
+  - RibbonAttack
+  - PlayerAttack
   - 
   - 
   - 

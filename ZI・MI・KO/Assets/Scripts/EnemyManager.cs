@@ -72,6 +72,19 @@ public class EnemyManager : MonoBehaviour {
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        /*if(col.gameObject.tag == "Trap")
+        {
+            DestroyEnemy();
+        }*/
+
+        if (col.gameObject.tag == "Ribbon")
+        {
+            DestroyEnemy();
+        }
+    }
+
     /// <summary>
     /// 消滅処理
     /// </summary>

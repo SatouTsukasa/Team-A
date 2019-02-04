@@ -329,11 +329,13 @@
     <Compile Include="Assets\Scripts\JumpBlock.cs" />
     <Compile Include="Assets\Scripts\LifeManager.cs" />
     <Compile Include="Assets\Scripts\Lift.cs" />
+    <Compile Include="Assets\Scripts\LiftDestroy.cs" />
     <Compile Include="Assets\Scripts\LiftInstance.cs" />
     <Compile Include="Assets\Scripts\LiftUpDown.cs" />
     <Compile Include="Assets\Scripts\MainCameraManager.cs" />
     <Compile Include="Assets\Scripts\Option.cs" />
     <Compile Include="Assets\Scripts\PlayerManager.cs" />
+    <Compile Include="Assets\Scripts\RibbonManager.cs" />
     <Compile Include="Assets\Scripts\StageSelectButton.cs" />
   </ItemGroup>
   <ItemGroup>

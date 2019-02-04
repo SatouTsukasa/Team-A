@@ -8,7 +8,7 @@ public class LiftInstance : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        InvokeRepeating("Instance", 2.0f, 3.0f);
+        InvokeRepeating("Instance", 0f, 3.0f);
 	}
 	
 	// Update is called once per frame
@@ -23,4 +23,6 @@ public class LiftInstance : MonoBehaviour {
     {
         Instantiate(Lift,new Vector3(transform.position.x,transform.position.y,transform.position.z),Quaternion.identity);
     }
+
+    
 }

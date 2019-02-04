@@ -31,13 +31,15 @@ public class PlayerManager : MonoBehaviour {
 
     private Renderer renderer;
 
+    private bool FloatBlock;
+
     public enum MOVE_DIR
     {
         STOP,
         LEFT,
         RIGHT
     };
-
+    private float x;
     private MOVE_DIR moveDirection = MOVE_DIR.STOP;
 
 	// Use this for initialization
@@ -51,8 +53,17 @@ public class PlayerManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        Debug.Log(RibbonC);
         canJump = Physics2D.Linecast(transform.position - (transform.right * 0.07f), transform.position - (transform.up * 0.07f), blockLayer) ||
             Physics2D.Linecast(transform.position + (transform.right * 0.07f), transform.position + (transform.up * 0.07f), blockLayer);
+        FloatBlock = Physics2D.Linecast(
+                    new Vector2(transform.position.x, transform.position.y + 0.5f),
+                    new Vector2(transform.position.x + 0.4f, transform.position.y + 0.1f),
+                    blockLayer) ||
+            Physics2D.Linecast(
+                    new Vector2(transform.position.x, transform.position.y + 0.5f),
+                    new Vector2(transform.position.x - 0.4f, transform.position.y + 0.1f),
+                    blockLayer);
 
         if (!usingButtons)
         {
@@ -79,15 +90,17 @@ public class PlayerManager : MonoBehaviour {
                 PushJumpButton();
             }
         }
-        if (isHit)
-        {
-            StartCoroutine("Invincible", isHit);
-        }
+        
         
     }
 
     private void FixedUpdate()
     {
+        x = transform.localScale.x;
+        if (isHit)
+        {
+            StartCoroutine("Invincible", isHit);
+        }
         //Debug.Log(HitCount);
         switch (moveDirection)
         {
@@ -112,6 +125,17 @@ public class PlayerManager : MonoBehaviour {
         {
             rbody.AddForce(Vector2.up * jumpPower);
             goJump = false;
+        }
+        if (FloatBlock)
+        {
+            if(x > 0)
+            {
+                transform.position = new Vector3(transform.position.x - 0.1f, transform.position.y, transform.position.z);
+            }
+            if (x < 0)
+            {
+                transform.position = new Vector3(transform.position.x + 0.1f, transform.position.y, transform.position.z);
+            }
         }
         animator.SetBool("onGround", canJump);
     }
@@ -159,6 +183,7 @@ public class PlayerManager : MonoBehaviour {
     {
         if (RibbonC)
         {
+            gameObject.layer = LayerMask.NameToLayer("PlayerAttack");
             animator.SetBool("Attack", true);
             Ribbon.SetActive(true);
         }
@@ -167,6 +192,7 @@ public class PlayerManager : MonoBehaviour {
 
     public void ReleaseAttackButton()
     {
+        gameObject.layer = LayerMask.NameToLayer("Player");
         animator.SetBool("Attack", false);
         Ribbon.SetActive(false);
     }
@@ -177,6 +203,7 @@ public class PlayerManager : MonoBehaviour {
     /// <param name="col">衝突したObjの情報</param>
     private void OnTriggerEnter2D(Collider2D col)
     {
+        //Debug.Log(col.gameObject.tag);
         if(gameManager.GetComponent<GameManager>().gameMode != GameManager.GAME_MODE.PLAY)
         {
             return;
@@ -266,6 +293,7 @@ public class PlayerManager : MonoBehaviour {
         {
             animator.SetBool("RibbonCatch", true);
             RibbonC = true;
+            Destroy(col.gameObject);
             //RibbonP.SetActive(true);
             //this.gameObject.GetComponent<SpriteRenderer>().sprite = RibbonP;
             //Debug.Log("asdfg");
@@ -275,7 +303,7 @@ public class PlayerManager : MonoBehaviour {
 
     IEnumerator Invincible()
     {
-        Debug.Log(isHit);
+        //Debug.Log(isHit);
         if(isHit && HitCount == 0)
         {
             gameObject.layer = LayerMask.NameToLayer("PlayerDamage");
