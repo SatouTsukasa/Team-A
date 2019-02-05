@@ -19,9 +19,10 @@ public class CreampuffCanonManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Vector3 diff = target.transform.position - transform.position;
+        Debug.Log(CreampuffRenderer.isVisible);
+         Vector3 diff = target.transform.position - transform.position;
         transform.rotation = Quaternion.FromToRotation(Vector3.left, diff);
-        if (CreampuffRenderer.isVisible)
+        if (CreampuffRenderer.isVisible == true)
         {
             timeElapsed += Time.deltaTime;
             if(timeElapsed >= timeOut)

@@ -7,6 +7,8 @@ using DG.Tweening;
 public class EnemyManager : MonoBehaviour {
     private const int ENEMY_POINT = 50;
 
+    public AudioClip tubusuSE;
+
     private GameObject gameManager;
 
     public LayerMask blockLayer;
@@ -21,12 +23,15 @@ public class EnemyManager : MonoBehaviour {
         RIGHT
     };
 
+    private AudioSource audiosource;
+
     private MOVE_DIR moveDirection = MOVE_DIR.LEFT;
 
     // Use this for initialization
     void Start () {
         rbody = GetComponent < Rigidbody2D>();
         gameManager = GameObject.Find("GameManager");
+        audiosource = gameManager.GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -90,6 +95,7 @@ public class EnemyManager : MonoBehaviour {
     /// </summary>
     public void DestroyEnemy()
     {
+        audiosource.PlayOneShot(tubusuSE);
         gameManager.GetComponent<GameManager>().AddScore(ENEMY_POINT);
 
         rbody.velocity = new Vector2(0, 0);
