@@ -42,27 +42,33 @@ public class PlayerManager : MonoBehaviour {
     private float x;
     private MOVE_DIR moveDirection = MOVE_DIR.STOP;
 
+    private AudioSource audiosource;
+
+    public AudioClip JumpSE;
+    public AudioClip RibbonAttackSE;
+
 	// Use this for initialization
 	void Start () {
         rbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         renderer = GetComponent<Renderer>();
         Ribbon.SetActive(false);
+        audiosource = gameManager.GetComponent<AudioSource>();
         
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        Debug.Log(RibbonC);
+        //Debug.Log(RibbonC);
         canJump = Physics2D.Linecast(transform.position - (transform.right * 0.07f), transform.position - (transform.up * 0.07f), blockLayer) ||
             Physics2D.Linecast(transform.position + (transform.right * 0.07f), transform.position + (transform.up * 0.07f), blockLayer);
         FloatBlock = Physics2D.Linecast(
-                    new Vector2(transform.position.x, transform.position.y + 0.5f),
-                    new Vector2(transform.position.x + 0.4f, transform.position.y + 0.1f),
+                    new Vector2(transform.position.x, transform.position.y + 1f),
+                    new Vector2(transform.position.x + 0.4f, transform.position.y + 1f),
                     blockLayer) ||
             Physics2D.Linecast(
-                    new Vector2(transform.position.x, transform.position.y + 0.5f),
-                    new Vector2(transform.position.x - 0.4f, transform.position.y + 0.1f),
+                    new Vector2(transform.position.x, transform.position.y + 1f),
+                    new Vector2(transform.position.x - 0.4f, transform.position.y + 1f),
                     blockLayer);
 
         if (!usingButtons)
@@ -123,6 +129,7 @@ public class PlayerManager : MonoBehaviour {
 
         if (goJump)
         {
+            audiosource.PlayOneShot(JumpSE);
             rbody.AddForce(Vector2.up * jumpPower);
             goJump = false;
         }
@@ -183,6 +190,7 @@ public class PlayerManager : MonoBehaviour {
     {
         if (RibbonC)
         {
+            audiosource.PlayOneShot(RibbonAttackSE);
             gameObject.layer = LayerMask.NameToLayer("PlayerAttack");
             animator.SetBool("Attack", true);
             Ribbon.SetActive(true);

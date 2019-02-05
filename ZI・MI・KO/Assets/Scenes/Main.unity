@@ -5447,11 +5447,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4772636951739124, guid: 26dcd4d7207fc5045aa4470825087bcb, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -8.2
+      value: -3.07
       objectReference: {fileID: 0}
     - target: {fileID: 4772636951739124, guid: 26dcd4d7207fc5045aa4470825087bcb, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -2.2
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 4772636951739124, guid: 26dcd4d7207fc5045aa4470825087bcb, type: 2}
       propertyPath: m_LocalPosition.z
@@ -5487,6 +5487,16 @@ Prefab:
       propertyPath: Ribbon
       value: 
       objectReference: {fileID: 1877489701}
+    - target: {fileID: 114271006595382634, guid: 26dcd4d7207fc5045aa4470825087bcb,
+        type: 2}
+      propertyPath: JumpSE
+      value: 
+      objectReference: {fileID: 8300000, guid: 87e9f134ba7d2f445ad044e98f37973b, type: 3}
+    - target: {fileID: 114271006595382634, guid: 26dcd4d7207fc5045aa4470825087bcb,
+        type: 2}
+      propertyPath: RibbonAttackSE
+      value: 
+      objectReference: {fileID: 8300000, guid: 3a0bbcb9e9e972b4aa118eb90713f717, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26dcd4d7207fc5045aa4470825087bcb, type: 2}
   m_IsPrefabAsset: 0
@@ -10574,6 +10584,101 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1560036759942614, guid: 166e5df6e63200648aca2c930ca23515,
     type: 2}
   m_PrefabInternal: {fileID: 179753413}
+--- !u!82 &1728610689
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1728610688}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 507ea337f6717fa40a11bce4160eb0d2, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!4 &1729272216 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4039257807750250, guid: abe983eec860f0148958d910ce2e9330,
@@ -12756,6 +12861,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114974584069249844, guid: a8c37b4b95a434d4ba548f6c77f327cd,
+        type: 2}
+      propertyPath: tubusuSE
+      value: 
+      objectReference: {fileID: 8300000, guid: 3725e3f26bbc77f40a44da2623a6c06c, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8c37b4b95a434d4ba548f6c77f327cd, type: 2}
   m_IsPrefabAsset: 0
