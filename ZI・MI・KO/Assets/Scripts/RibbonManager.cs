@@ -19,14 +19,14 @@ public class RibbonManager : MonoBehaviour {
         {
             if(x > 0)
             {
-                Vector3 Ribbonpos = new Vector3(Player.transform.position.x + 0.9f, Player.transform.position.y - 0.22f, Player.transform.position.z);
-                transform.localScale = new Vector3(0.2f, 0.2f, 1);
+                Vector3 Ribbonpos = new Vector3(Player.transform.position.x + 0.9f, Player.transform.position.y + 0.5f, Player.transform.position.z);
+                transform.localScale = new Vector3(1f, 1f, 1);
                 transform.position = Ribbonpos;
             }
             else if(x < 0)
             {
-                Vector3 Ribbonpos = new Vector3(Player.transform.position.x + 0.9f * -1, (Player.transform.position.y - 0.22f), Player.transform.position.z);
-                transform.localScale = new Vector3(-0.2f, 0.2f, 1);
+                Vector3 Ribbonpos = new Vector3(Player.transform.position.x + 0.9f * -1, (Player.transform.position.y + 0.5f), Player.transform.position.z);
+                transform.localScale = new Vector3(-1f, 1f, 1);
                 transform.position = Ribbonpos;
             }
             
