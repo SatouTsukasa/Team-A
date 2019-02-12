@@ -46,6 +46,7 @@ public class PlayerManager : MonoBehaviour {
 
     public AudioClip JumpSE;
     public AudioClip RibbonAttackSE;
+    public AudioClip GoalSE;
 
 	// Use this for initialization
 	void Start () {
@@ -238,6 +239,7 @@ public class PlayerManager : MonoBehaviour {
 
         if(col.gameObject.tag == "Goal")
         {
+            audiosource.PlayOneShot(GoalSE);
             Destroy(animator,0.5f);
             gameManager.GetComponent<GameManager>().GameClear();
             //GetComponent<Rigidbody2D>().gravityScale = 100;
